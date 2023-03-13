@@ -1,0 +1,54 @@
+
+*{
+    margin: 0;
+}
+
+html{
+    height: 100%;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: red;
+}
+
+
+
+.clac{
+    width: 280px;
+    height: 280px;
+    background-color: black;
+
+}
+
+.clac .val{
+height: 40px;
+color: white;
+font-size: xx-large;
+
+}
+
+.val{
+    padding:0px 15px;
+
+   
+}
+
+.btn{
+    display: flex;
+    flex-wrap: wrap;
+    height: calc(100% - 42px);
+    background-color: red;
+}
+
+button{
+    background-color: white;
+    color: red;
+    width: 25%;
+    font-size: 22px;
+    border-radius: 10%;
+}
+
