@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottles-Register</title>
+    <link rel="stylesheet" href="./style/dist/style.css">
+    <script src="./src/dist/registerctrl.js" defer></script>
+</head>
+<body>
+    <div class="reg">
+        <form class="reg__form" onsubmit="registerUser(event)">
+            <h2 class="reg__form__h2">Register here</h2>
+            <input type="text" class="reg__form_inp" placeholder="Your Name" name="name" required>
+            <br>
+            <input type="email" class="reg__form_inp" placeholder="Email" name="email" required>
+            <br>
+            <input type="password" class="reg__form_inp" placeholder="Password" name="password" required>
+            <br>
+            <button type="submit" class="reg__form__btn">Register</button>
+
+        </form>
+    </div>
+</body>
+</html>
