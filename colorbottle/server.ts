@@ -1,19 +1,18 @@
 import express from "express";
-import "./data/dist/mydata";
 import * as dotenv from "dotenv";
 dotenv.config()
+import "./data/mydata";
 import cookieParser from 'cookie-parser';
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-
-
-
-
 app.use(express.static("./public"));
-app.use("/css",express.static("./style/dist"));
+app.use("/css",express.static("./public/style"));
 
 
-app.listen(3123, ()=>{
-    console.log(`server listen at: 3123`)
+import playerRoutes from "./API/players/playersRoutes";
+app.use("/api/players", playerRoutes)
+
+app.listen(4000, ()=>{
+    console.log(`server listen at: 4000`)
 })
