@@ -9,7 +9,6 @@ var app = express_1["default"]();
 app.use(express_1["default"].json());
 app.use(cookie_parser_1["default"]());
 app.use(express_1["default"].static("./public"));
-app.use("/css", express_1["default"].static("./public/style"));
 var playersRoutes_1 = require("./API/players/playersRoutes");
 app.use("/api/players", playersRoutes_1["default"]);
 app.listen(4000, function () {

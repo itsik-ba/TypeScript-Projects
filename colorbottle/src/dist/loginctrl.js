@@ -4,7 +4,6 @@ function handleLogin(event) {
         var email_1 = event.target.elements.name.value;
         var password = event.target.elements.password.value;
         var userLogin = { email: email_1, password: password };
-        var htmlEror = document.querySelector("#error");
         if (!email_1)
             throw new Error("user name is not valid");
         if (!password)
