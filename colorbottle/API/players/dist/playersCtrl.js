@@ -36,21 +36,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.mainPage = exports.addNewPlayer = void 0;
+exports.playerLogin = exports.addNewPlayer = void 0;
 var playersModel_1 = require("./playersModel");
 var jwt = require("jwt-simple");
 var secret = process.env.JWT_SECRET;
-// import bcrypt from "bcryptjs";
-// const salt = bcrypt.genSaltSync(10);
+var bcryptjs_1 = require("bcryptjs");
+var salt = bcryptjs_1["default"].genSaltSync(10);
 exports.addNewPlayer = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, email, password, playerRegister, error_1;
+    var _a, name, email, password, hash, playerRegister, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
                 _a = req.body, name = _a.name, email = _a.email, password = _a.password;
+                hash = bcryptjs_1["default"].hashSync(password, salt);
                 return [4 /*yield*/, playersModel_1["default"].create({
-                    // name, email, password: hash
+                        name: name, email: email,
+                        password: hash
                     })];
             case 1:
                 playerRegister = _b.sent();
@@ -68,33 +70,34 @@ exports.addNewPlayer = function (req, res) { return __awaiter(void 0, void 0, vo
         }
     });
 }); };
-exports.mainPage = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        try {
-            res.send({ ok: true });
+exports.playerLogin = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, email, password, playerLog, token, error_2;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _b.trys.push([0, 2, , 3]);
+                _a = req.body, email = _a.email, password = _a.password;
+                password = bcryptjs_1["default"].hashSync(password, salt);
+                return [4 /*yield*/, playersModel_1["default"].findOne({ email: email, password: password })];
+            case 1:
+                playerLog = _b.sent();
+                if (!playerLog) {
+                    res.status(401).send({ ok: false });
+                }
+                else {
+                    token = jwt.encode(playerLog._id, secret);
+                    console.log(token);
+                    res.cookie("" + email, token, {
+                        maxAge: 9000000, httpOnly: true
+                    });
+                    res.status(200).send({ ok: true });
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _b.sent();
+                console.error(error_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
-        catch (error) {
-            console.error(error);
-        }
-        return [2 /*return*/];
     });
 }); };
-// export const playerLogin = async (req: any, res: any) => {
-//   try {
-//     let { email, password } = req.body;
-//     password = bcrypt.hashSync(password, salt);
-//     const playerLog = await UserModel.findOne({ email, password })
-//     if (!playerLog) {
-//       res.status(401).send({ ok: false })
-//     } else {
-//       const token = jwt.encode(playerLog._id, secret)
-//       console.log(token)
-//       res.cookie(`${email}`, token, {
-//         maxAge: 9000000, httpOnly: true
-//       })
-//       res.status(200).send({ ok: true })
-//     }
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }

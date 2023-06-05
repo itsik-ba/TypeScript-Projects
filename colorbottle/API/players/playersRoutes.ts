@@ -3,7 +3,7 @@ const router = express.Router();
 
 import {
 addNewPlayer,
-// playerLogin,
+playerLogin,
 
 
 } from "./playersCtrl";
@@ -14,7 +14,7 @@ addNewPlayer,
 router
 
 .post("/register", addNewPlayer)
-// .post("/login", playerLogin)
+.post("/login", playerLogin)
 
 
 
